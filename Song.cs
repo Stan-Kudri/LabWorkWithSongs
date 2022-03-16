@@ -4,30 +4,31 @@
     {
         private readonly string _name;
         private readonly string _author;
+        private readonly Song? _previous;
 
-        public Song PastSong
+        public string Name => _name;
+
+        public string Author => _author;
+
+        public string Title => $"{_author} - {_name}";
+
+        public Song? Previous => _previous;
+
+        public Song(string name, string author) : this(name, author, null)
         {
-            get { return PastSong; }
-            set
-            {
-                Equals(value);
-                PastSong = value;
-            }
         }
 
-        public Song(string name, string author)
+        public Song(string name, string author, Song? pastSong = null)
         {
             _name = name;
             _author = author;
+            _previous = pastSong;
         }
-
 
         public void PrintSong()
         {
-            Console.WriteLine(Title());
+            Console.WriteLine(Title);
         }
-
-        public string Title() => String.Format($"{_author} - {_name}");
 
         public bool Equals(Song? song)
         {
@@ -36,13 +37,13 @@
 
         public override string ToString()
         {
-            return String.Format($"{_author} - {_name}");
+            return Title;
         }
 
         public override bool Equals(object? obj)
         {
             if (obj == null)
-                throw new ArgumentNullException(nameof(obj));
+                return false;
 
             return Equals(obj as Song);
         }

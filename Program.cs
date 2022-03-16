@@ -38,9 +38,9 @@ using LabWorkWithSongs;
 
 var songList = new List<Song>();
 songList.Add(new Song("Не нужна", "ЛСП"));
-songList.Add(new Song("Убийца Свин", "ЛСП"));
-songList.Add(new Song("Спининг", "ЛСП"));
-songList.Add(new Song("Не нужна", "ЛСП"));
+songList.Add(new Song("Убийца Свин", "ЛСП", new Song("Не нужна", "ЛСП")));
+songList.Add(new Song("Спининг", "ЛСП", new Song("Убийца Свин", "ЛСП")));
+songList.Add(new Song("Спининг", "ЛСП", new Song("Спининг", "ЛСП")));
 
 foreach (var song in songList)
 {

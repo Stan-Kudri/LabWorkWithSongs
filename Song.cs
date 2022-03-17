@@ -45,12 +45,7 @@
 
         public bool EqualSongsByArtist(Song? song)
         {
-            if (_artist == null)
-                return Equals(song);
-            else
-            {
-                return song != null && song.Name == _name;
-            }
+            return song != null && song.Name == _name;
         }
 
         private bool Equals(Song? song)

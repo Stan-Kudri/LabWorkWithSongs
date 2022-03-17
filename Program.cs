@@ -39,8 +39,8 @@ using LabWorkWithSongs;
 var songList = new List<Song>();
 songList.Add(new Song("Не нужна", "ЛСП"));
 songList.Add(new Song("Убийца Свин", "ЛСП", new Song("Не нужна", "ЛСП")));
-songList.Add(new Song("Спининг", "ЛСП", new Song("Убийца Свин", "ЛСП")));
-songList.Add(new Song("Спининг", "ЛСП", new Song("Спининг", "ЛСП")));
+songList.Add(new Song("Безумие", "ЛСП", new Song("Убийца Свин", "ЛСП")));
+songList.Add(new Song("Безумие", "ЛСП", new Song("Безумие", "ЛСП")).WithFeature("Oxxxymiron"));
 
 foreach (var song in songList)
 {
@@ -48,6 +48,7 @@ foreach (var song in songList)
 }
 
 PrintingTheSongComparisonResult(songList);
+PrintingTheSongComparisonResultName(songList);
 
 void PrintingTheSongComparisonResult(List<Song> songs)
 {
@@ -56,6 +57,19 @@ void PrintingTheSongComparisonResult(List<Song> songs)
     {
         Console.WriteLine($"{songs[i - 1]}  and  {songs[i]}");
         if (songs[i - 1].Equals(songs[i]))
+        {
+            Console.WriteLine("Песни одинаковые");
+        }
+    }
+}
+
+void PrintingTheSongComparisonResultName(List<Song> songs)
+{
+    Console.WriteLine("Сравнивание предыдущей песни в списке с прошлой");
+    for (var i = 1; i < songs.Count; i++)
+    {
+        Console.WriteLine($"{songs[i - 1]}  and  {songs[i]}");
+        if (songs[i - 1].EqualSongsByArtist(songs[i]))
         {
             Console.WriteLine("Песни одинаковые");
         }

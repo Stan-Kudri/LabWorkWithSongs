@@ -5,12 +5,16 @@
         private readonly string _name;
         private readonly string _author;
         private readonly Song? _previous;
+        List<string> _artist;
+
 
         public string Name => _name;
 
         public string Author => _author;
 
-        public string Title => $"{_author} - {_name}";
+        public string Title => _artist.Count > 0 ?
+                    string.Format($"{_author} - {_name} feat {string.Join('&', _artist)}") :
+                    $"{_author} - {_name}";
 
         public Song? Previous => _previous;
 
@@ -23,6 +27,15 @@
             _name = name;
             _author = author;
             _previous = pastSong;
+            _artist = new List<string>();
+        }
+
+        public Song WithFeature(string artist)
+        {
+            if (artist == null)
+                throw new ArgumentNullException(nameof(artist));
+            _artist.Add(artist);
+            return this;
         }
 
         public void PrintSong()
@@ -30,9 +43,21 @@
             Console.WriteLine(Title);
         }
 
-        public bool Equals(Song? song)
+        public bool EqualSongsByArtist(Song? song)
         {
-            return song != null && song._author == _author && song._name == _name;
+            if (_artist == null)
+                return Equals(song);
+            else
+            {
+                return song != null && song.Name == _name;
+            }
+        }
+
+        private bool Equals(Song? song)
+        {
+            if (_artist.Count == song._artist.Count)
+                return song != null && song._author == _author && song._name == _name;
+            return false;
         }
 
         public override string ToString()
@@ -50,7 +75,7 @@
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_author, _name);
+            return HashCode.Combine(_author, _name, _previous, _artist);
         }
     }
 }

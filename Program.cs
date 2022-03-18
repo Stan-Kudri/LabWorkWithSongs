@@ -40,15 +40,25 @@ var songList = new List<Song>();
 songList.Add(new Song("Не нужна", "ЛСП"));
 songList.Add(new Song("Убийца Свин", "ЛСП", new Song("Не нужна", "ЛСП")));
 songList.Add(new Song("Безумие", "ЛСП", new Song("Убийца Свин", "ЛСП")));
-songList.Add(new Song("Безумие", "ЛСП", new Song("Безумие", "ЛСП")).WithFeature("Oxxxymiron"));
+songList.Add(new Song("Безумие", "ЛСП", new Song("Безумие", "ЛСП").WithFeature("Oxxxymiron")).WithFeature("Oxxxymiron"));
 
 foreach (var song in songList)
 {
     Console.WriteLine(song);
 }
+Console.WriteLine();
 
 PrintingTheSongComparisonResult(songList);
+Console.WriteLine();
 PrintingTheSongComparisonResultName(songList);
+
+Console.WriteLine();
+for (var i = 0; i < songList.Count; i++)
+{
+    Console.WriteLine("Сравнивание предыдущей песни в списке с прошлой");
+    Console.WriteLine(songList[i]);
+    Console.WriteLine(songList[i].IsSongInSong());
+}
 
 void PrintingTheSongComparisonResult(List<Song> songs)
 {

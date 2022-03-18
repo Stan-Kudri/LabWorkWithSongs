@@ -5,7 +5,7 @@
         private readonly string _name;
         private readonly string _author;
         private readonly Song? _previous;
-        List<string> _artist;
+        private readonly List<string> _artist;
 
 
         public string Name => _name;
@@ -34,13 +34,21 @@
         {
             if (artist == null)
                 throw new ArgumentNullException(nameof(artist));
-            _artist.Add(artist);
+            this._artist.Add(artist);
             return this;
         }
 
         public void PrintSong()
         {
             Console.WriteLine(Title);
+        }
+
+        public bool IsSongInSong()
+        {
+            if (_previous != null && Equals(_previous))
+                return true;
+            else
+                return false;
         }
 
         public bool EqualSongsByArtist(Song? song)
@@ -50,8 +58,17 @@
 
         private bool Equals(Song? song)
         {
-            if (_artist.Count == song._artist.Count)
-                return song != null && song._author == _author && song._name == _name;
+            if (song != null)
+            {
+                if (_artist.Count == 0 && song._artist.Count == 0)
+                    return song._author == _author && song._name == _name;
+                else if (_artist.Count > 0 && song._artist.Count > 0 && _artist.Count == song._artist.Count)
+                {
+                    _artist.Sort();
+                    song._artist.Sort();
+                    return _artist.SequenceEqual<string>(song._artist) && song._author == _author && song._name == _name;
+                }
+            }
             return false;
         }
 

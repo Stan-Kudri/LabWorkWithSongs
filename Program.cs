@@ -36,16 +36,32 @@ Song(); ?
 
 using LabWorkWithSongs;
 
-var songList = new List<Song>();
-songList.Add(new Song("Не нужна", "ЛСП"));
-songList.Add(new Song("Убийца Свин", "ЛСП", new Song("Не нужна", "ЛСП")));
-songList.Add(new Song("Безумие", "ЛСП", new Song("Убийца Свин", "ЛСП")));
-songList.Add(new Song("Безумие", "ЛСП", new Song("Безумие", "ЛСП").WithFeature("Oxxxymiron")).WithFeature("Oxxxymiron"));
+//var songList = new List<Song>();
 
-foreach (var song in songList)
+var pastSong = new Song("Убийца Свин", "ЛСП");
+
+var song = new Song("Не нужна", "ЛСП", pastSong);
+
+pastSong = song;
+song = new Song("Канкан", "ЛСП", pastSong);
+
+pastSong = song;
+song = new Song("Безумие", "ЛСП", pastSong).WithFeature("Oxxxymiron");
+
+pastSong = song;
+song = new Song("Безумие", "ЛСП", pastSong);
+
+foreach (var item in song)
 {
-    Console.WriteLine(song);
+    Console.WriteLine(item);
 }
+
+foreach (var item in song)
+{
+    Console.WriteLine(item);
+}
+
+/*PrintListSong(songList);
 Console.WriteLine();
 
 PrintingTheSongComparisonResult(songList);
@@ -53,14 +69,24 @@ Console.WriteLine();
 PrintingTheSongComparisonResultName(songList);
 
 Console.WriteLine();
-for (var i = 0; i < songList.Count; i++)
+*/
+
+/*for (var i = 0; i < songList.Count; i++)
 {
     Console.WriteLine("Сравнивание предыдущей песни в списке с прошлой");
     Console.WriteLine(songList[i]);
-    Console.WriteLine(songList[i].IsSongInSong());
-}
+    Console.WriteLine(songList[i].ComparisonIsPreviousSong());
+}*/
 
-void PrintingTheSongComparisonResult(List<Song> songs)
+/*void PrintListSong(List<Song> songs)
+{
+    foreach (var song in songs)
+    {
+        Console.WriteLine(song);
+    }
+}*/
+
+/*void PrintingTheSongComparisonResult(List<Song> songs)
 {
     Console.WriteLine("Сравнивание предыдущей песни в списке с прошлой");
     for (var i = 1; i < songs.Count; i++)
@@ -71,17 +97,17 @@ void PrintingTheSongComparisonResult(List<Song> songs)
             Console.WriteLine("Песни одинаковые");
         }
     }
-}
+}*/
 
-void PrintingTheSongComparisonResultName(List<Song> songs)
+/*void PrintingTheSongComparisonResultName(List<Song> songs)
 {
     Console.WriteLine("Сравнивание предыдущей песни в списке с прошлой");
     for (var i = 1; i < songs.Count; i++)
     {
         Console.WriteLine($"{songs[i - 1]}  and  {songs[i]}");
-        if (songs[i - 1].EqualSongsByArtist(songs[i]))
+        if (songs[i - 1].EqualSongsByName(songs[i]))
         {
             Console.WriteLine("Песни одинаковые");
         }
     }
-}
+}*/

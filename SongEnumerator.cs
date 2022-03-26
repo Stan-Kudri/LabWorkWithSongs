@@ -5,6 +5,7 @@ namespace LabWorkWithSongs
     public class SongEnumerator : IEnumerator<Song>
     {
         private Song _current;
+        private Song? _initial;
 
         public SongEnumerator(Song song)
         {
@@ -21,6 +22,11 @@ namespace LabWorkWithSongs
 
         public bool MoveNext()
         {
+            if (_initial == null)
+            {
+                _initial = _current;
+                return true;
+            }
             if (_current.Previous == null)
                 return false;
             _current = _current.Previous;
@@ -29,6 +35,8 @@ namespace LabWorkWithSongs
 
         public void Reset()
         {
+            if (_initial != null)
+                _current = _initial;
         }
     }
 }

@@ -53,13 +53,18 @@ song = new Song("Безумие", "ЛСП", pastSong);
 
 foreach (var item in song)
 {
+    foreach (var element in item)
+    {
+        Console.WriteLine(element);
+    }
+    Console.WriteLine();
     Console.WriteLine(item);
 }
 
-foreach (var item in song)
+/*foreach (var item in song)
 {
     Console.WriteLine(item);
-}
+}*/
 
 /*PrintListSong(songList);
 Console.WriteLine();

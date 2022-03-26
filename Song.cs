@@ -45,12 +45,12 @@ namespace LabWorkWithSongs
             Console.WriteLine(Title);
         }
 
-        public bool ComparisonIsPreviousSong()
+        public bool EqualBySong()
         {
             return _previous != null && Equals(_previous);
         }
 
-        public bool EqualSongsByName(Song? song)
+        public bool EqualByName(Song? song)
         {
             return song != null && song.Name == _name;
         }
@@ -84,7 +84,8 @@ namespace LabWorkWithSongs
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_author, _name, _previous, _artist.Select(x => x.GetHashCode()));
+            var hashCodeArtist = _artist.Select(x => x.GetHashCode()).Count();
+            return HashCode.Combine(_author, _name, _previous, hashCodeArtist);
         }
 
 

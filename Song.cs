@@ -45,7 +45,6 @@ namespace LabWorkWithSongs
             Console.WriteLine(Title);
         }
 
-
         private bool Equals(Song? song)
         {
             if (song != null)
@@ -54,7 +53,7 @@ namespace LabWorkWithSongs
                     return song._author == _author && song._name == _name;
                 else if (_artist.Count == song._artist.Count)
                 {
-                    return _artist.SequenceEqual<string>(song._artist) && song._author == _author && song._name == _name;
+                    return _artist.SequenceEqual<string>(song._artist) && song._author == _author && song._name == _name && song.GetType() == GetType();
                 }
             }
             return false;
@@ -75,8 +74,15 @@ namespace LabWorkWithSongs
 
         public override int GetHashCode()
         {
-            if (_artist.Count > 0)
-                return HashCode.Combine(_author, _name, _previous, _artist.Select(x => x.GetHashCode()).Aggregate((x, y) => x + y));
+            if (_artist.Count > 1)
+            {
+                var hashCodeArtist = _artist.Select(x => x.GetHashCode()).Aggregate((x, y) => x + y);
+                return HashCode.Combine(_author, _name, _previous, hashCodeArtist);
+            }
+            else if (_artist.Count == 1)
+            {
+                return HashCode.Combine(_author, _name, _previous, _artist.First().GetHashCode());
+            }
             return HashCode.Combine(_author, _name, _previous);
         }
 

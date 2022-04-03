@@ -9,7 +9,6 @@ namespace LabWorkWithSongs
         private readonly Song? _previous;
         private readonly List<string> _artist;
 
-
         public string Name => _name;
 
         public string Author => _author;
@@ -45,17 +44,31 @@ namespace LabWorkWithSongs
             Console.WriteLine(Title);
         }
 
-        private bool Equals(Song? song)
+        public bool Equals(Song? song, SongEqualityType type)
         {
-            if (song != null)
+            if (song != null && type != 0)
             {
-                if (_artist.Count == 0 && song._artist.Count == 0)
-                    return song._author == _author && song._name == _name;
-                else if (_artist.Count == song._artist.Count)
+                switch (type)
                 {
-                    return _artist.SequenceEqual<string>(song._artist) && song._author == _author && song._name == _name && song.GetType() == GetType();
+                    case SongEqualityType.Name:
+                        return song.Name == _name;
+
+                    case SongEqualityType.Author:
+                        return song.Author == _author;
+
+                    case SongEqualityType.Song:
+                        return Equals(song);
                 }
             }
+            return false;
+        }
+
+        private bool Equals(Song song)
+        {
+            if (_artist.Count == 0 && song._artist.Count == 0)
+                return song._author == _author && song._name == _name;
+            else if (_artist.Count == song._artist.Count)
+                return _artist.SequenceEqual<string>(song._artist) && song._author == _author && song._name == _name;
             return false;
         }
 
@@ -68,24 +81,14 @@ namespace LabWorkWithSongs
         {
             if (obj == null)
                 return false;
-
-            return Equals(obj as Song);
+            return Equals(obj is Song);
         }
 
         public override int GetHashCode()
         {
-            if (_artist.Count > 1)
-            {
-                var hashCodeArtist = _artist.Select(x => x.GetHashCode()).Aggregate((x, y) => x + y);
-                return HashCode.Combine(_author, _name, _previous, hashCodeArtist);
-            }
-            else if (_artist.Count == 1)
-            {
-                return HashCode.Combine(_author, _name, _previous, _artist.First().GetHashCode());
-            }
-            return HashCode.Combine(_author, _name, _previous);
+            var hashCodeArtist = _artist.Select(x => x.GetHashCode()).DefaultIfEmpty().Aggregate((x, y) => x + y);
+            return HashCode.Combine(_author, _name, _previous, hashCodeArtist);
         }
-
 
         public IEnumerator<Song> GetEnumerator()
         {

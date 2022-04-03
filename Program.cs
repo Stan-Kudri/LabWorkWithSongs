@@ -56,6 +56,8 @@ foreach (var item in song)
     foreach (var element in item)
     {
         Console.WriteLine(element);
+        var type = SongEqualityType.Song;
+        element.Equals(item, type);
     }
     Console.WriteLine();
     Console.WriteLine(item);

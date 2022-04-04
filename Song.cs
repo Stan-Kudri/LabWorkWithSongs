@@ -46,7 +46,7 @@ namespace LabWorkWithSongs
 
         public bool Equals(Song? song, SongEqualityType type)
         {
-            if (song != null && type != 0)
+            if (song != null)
             {
                 switch (type)
                 {
@@ -56,7 +56,7 @@ namespace LabWorkWithSongs
                     case SongEqualityType.Author:
                         return song.Author == _author;
 
-                    case SongEqualityType.Song:
+                    case SongEqualityType.Full:
                         return Equals(song);
                 }
             }
@@ -79,9 +79,9 @@ namespace LabWorkWithSongs
 
         public override bool Equals(object? obj)
         {
-            if (obj == null)
+            if (obj == null || obj.GetType() != typeof(Song))
                 return false;
-            return Equals(obj is Song);
+            return Equals((Song)obj);
         }
 
         public override int GetHashCode()

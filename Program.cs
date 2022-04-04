@@ -56,8 +56,12 @@ foreach (var item in song)
     foreach (var element in item)
     {
         Console.WriteLine(element);
-        var type = SongEqualityType.Song;
-        element.Equals(item, type);
+
+        Console.WriteLine("Проверка Equals :");
+        Console.WriteLine($"{element} и {item}  == FullType {element.Equals(item, SongEqualityType.Full)}");
+        Console.WriteLine($"{element} и {item}  == NameType {element.Equals(item, SongEqualityType.Name)}");
+        Console.WriteLine($"{element} и {item}  == AuthorType {element.Equals(item, SongEqualityType.Author)}");
+        Console.WriteLine($"Переопределенный метод Equals: {element.Equals(item)}");
     }
     Console.WriteLine();
     Console.WriteLine(item);

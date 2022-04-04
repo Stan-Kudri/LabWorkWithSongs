@@ -2,7 +2,7 @@
 {
     public enum SongEqualityType
     {
-        Song,
+        Full,
         Name,
         Author,
     }

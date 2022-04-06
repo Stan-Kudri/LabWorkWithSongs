@@ -58,13 +58,19 @@ foreach (var item in song)
         Console.WriteLine(element);
 
         Console.WriteLine("Проверка Equals :");
-        Console.WriteLine($"{element} и {item}  == FullType {element.Equals(item, SongEqualityType.Full)}");
-        Console.WriteLine($"{element} и {item}  == NameType {element.Equals(item, SongEqualityType.Name)}");
-        Console.WriteLine($"{element} и {item}  == AuthorType {element.Equals(item, SongEqualityType.Author)}");
+        PrintResultEquals(element, item);
         Console.WriteLine($"Переопределенный метод Equals: {element.Equals(item)}");
     }
     Console.WriteLine();
     Console.WriteLine(item);
+}
+
+void PrintResultEquals(Song first, Song second)
+{
+    foreach (var type in Enum.GetValues(typeof(SongEqualityType)))
+    {
+        Console.WriteLine($"{first} и {second}  == {(SongEqualityType)type} сравнение, с результатом {first.Equals(second, (SongEqualityType)type)}");
+    }
 }
 
 /*foreach (var item in song)

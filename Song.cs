@@ -46,19 +46,20 @@ namespace LabWorkWithSongs
 
         public bool Equals(Song? song, SongEqualityType type)
         {
-            if (song != null)
+            if (song == null)
             {
-                switch (type)
-                {
-                    case SongEqualityType.Name:
-                        return song.Name == _name;
+                return false;
+            }
+            switch (type)
+            {
+                case SongEqualityType.Name:
+                    return song.Name == _name;
 
-                    case SongEqualityType.Author:
-                        return song.Author == _author;
+                case SongEqualityType.Author:
+                    return song.Author == _author;
 
-                    case SongEqualityType.Full:
-                        return Equals(song);
-                }
+                case SongEqualityType.Full:
+                    return Equals(song);
             }
             return false;
         }
@@ -68,7 +69,7 @@ namespace LabWorkWithSongs
             if (_artist.Count == 0 && song._artist.Count == 0)
                 return song._author == _author && song._name == _name;
             else if (_artist.Count == song._artist.Count)
-                return _artist.SequenceEqual<string>(song._artist) && song._author == _author && song._name == _name;
+                return _artist.SequenceEqual(song._artist) && song._author == _author && song._name == _name;
             return false;
         }
 
@@ -79,9 +80,9 @@ namespace LabWorkWithSongs
 
         public override bool Equals(object? obj)
         {
-            if (obj == null || obj.GetType() != typeof(Song))
-                return false;
-            return Equals((Song)obj);
+            if (obj is Song song)
+                return Equals(song);
+            return false;
         }
 
         public override int GetHashCode()

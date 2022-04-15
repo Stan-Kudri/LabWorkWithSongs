@@ -3,12 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32127.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabWorkWithSongs", "LabWorkWithSongs\LabWorkWithSongs.csproj", "{60138CDC-C0AA-4AC2-8EFA-9502991C945D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabWorkWithSongs", "LabWorkWithSongs.csproj", "{60138CDC-C0AA-4AC2-8EFA-9502991C945D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabWorkWithSongs.Test", "LabWorkWithSongs.Test\LabWorkWithSongs.Test.csproj", "{87A528A7-4643-43DD-9BE2-003112945A92}"
-	ProjectSection(ProjectDependencies) = postProject
-		{60138CDC-C0AA-4AC2-8EFA-9502991C945D} = {60138CDC-C0AA-4AC2-8EFA-9502991C945D}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabWorkWithSongs.Test", "LabWorkWithSongs.Test\LabWorkWithSongs.Test.csproj", "{87A528A7-4643-43DD-9BE2-003112945A92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

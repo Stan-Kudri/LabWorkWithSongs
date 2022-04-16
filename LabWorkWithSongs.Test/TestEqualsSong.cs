@@ -1,11 +1,11 @@
-using Xunit;
+Ôªøusing Xunit;
 
 namespace LabWorkWithSongs.Test
 {
     public class TestEqualsSong
     {
         [Theory]
-        [InlineData(" ‡ÌÍ‡Ì", "À—œ")]
+        [InlineData("–ö–∞–Ω–∫–∞–Ω", "–õ–°–ü")]
         public void Create_two_equal_songs(string name, string author)
         {
             var secondSong = new Song(name, author);
@@ -14,7 +14,7 @@ namespace LabWorkWithSongs.Test
         }
 
         [Theory]
-        [InlineData(" ‡ÌÍ‡Ì", "À—œ")]
+        [InlineData("–ö–∞–Ω–∫–∞–Ω", "–õ–°–ü")]
         public void Create_two_equal_songs_in_full(string name, string author)
         {
             var secondSong = new Song(name, author).WithFeature("Oxxxymiron").WithFeature("Jubilee");
@@ -23,7 +23,7 @@ namespace LabWorkWithSongs.Test
         }
 
         [Theory]
-        [InlineData(" ‡ÌÍ‡Ì", "À—œ")]
+        [InlineData("–ö–∞–Ω–∫–∞–Ω", "–õ–°–ü")]
         public void Create_two_equal_songs_in_name(string name, string author)
         {
             var secondSong = new Song(name, author);
@@ -32,7 +32,7 @@ namespace LabWorkWithSongs.Test
         }
 
         [Theory]
-        [InlineData(" ‡ÌÍ‡Ì", "À—œ")]
+        [InlineData("–ö–∞–Ω–∫–∞–Ω", "–õ–°–ü")]
         public void Create_two_equal_songs_in_author(string name, string author)
         {
             var secondSong = new Song(name, author);

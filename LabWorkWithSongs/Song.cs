@@ -25,8 +25,6 @@ namespace LabWorkWithSongs
 
         public Song(string name, string author, Song? pastSong = null)
         {
-            if (name == null || author == null)
-                throw new ArgumentNullException(nameof(name));
             _name = name;
             _author = author;
             _previous = pastSong;

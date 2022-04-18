@@ -1,32 +1,58 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace LabWorkWithSongs.Test
 {
     public class TestEnumeratorSong
     {
         [Theory]
-        [InlineData("Канкан", "Маг", "Дубак", "ЛСП", "Murovei", "Anacondaz")]
-        public void List_songs_and_get_equal_result(string firstName, string secondName, string thirdName, string firstAuthor, string secondAuthor, string thirdAuthor)
+        [MemberData(nameof(Data.Enumeable), MemberType = typeof(Data))]
+        public void Get_equal_result(Song checkSong, Song[] expectResult)
         {
-            var pastSong = new Song(thirdName, thirdAuthor);
-            var song = new Song(secondName, secondAuthor, pastSong);
+            var song = checkSong;
+            var arraySong = song.Reverse().ToArray();
+            Assert.Equal(expectResult.Length, arraySong.Length);
+            Assert.True(expectResult.SequenceEqual(arraySong));
+        }
 
-            pastSong = song;
-            song = new Song(firstName, firstAuthor, pastSong);
-
-            var position = 0;
-
-            var listSong = new Song[3]
+        private class Data
+        {
+            public static IEnumerable<object> Enumeable
             {
-                new Song(firstName, firstAuthor),
-                new Song(secondName, secondAuthor, new Song(firstName,firstAuthor)),
-                new Song(thirdName, thirdAuthor, new Song(secondName,secondAuthor)),
-            };
-
-            foreach (var element in song)
-            {
-                Assert.True(element.Equals(listSong[position]));
-                position++;
+                get
+                {
+                    var firstResult = new Song[3]
+                    {
+                        new Song("Канкан", "ЛСП"),
+                        new Song("Маг", "Murovei", new Song("Канкан","ЛСП")),
+                        new Song("Дубак", "Anacondaz", new Song("Маг","Murovei")),
+                    };
+                    var secondResult = new Song[2]
+                    {
+                        new Song("Канкан", "ЛСП"),
+                        new Song("Маг", "Murovei", new Song("Канкан","ЛСП")),
+                    };
+                    var thirdResult = new Song[1]
+                    {
+                        new Song("Канкан", "ЛСП")
+                    };
+                    yield return new object[]
+                    {
+                        new Song("Дубак", "Anacondaz", new Song("Маг","Murovei", new Song("Канкан","ЛСП"))),
+                        firstResult
+                    };
+                    yield return new object[]
+                    {
+                        new Song("Маг","Murovei", new Song("Канкан","ЛСП")),
+                        secondResult
+                    };
+                    yield return new object[]
+                    {
+                        new Song("Канкан","ЛСП"),
+                        thirdResult
+                    };
+                }
             }
         }
     }

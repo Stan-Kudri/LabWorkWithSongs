@@ -6,7 +6,7 @@ namespace LabWorkWithSongs.Test
     {
         [Theory]
         [InlineData("Канкан", "Маг", "ЛСП", "Murovei")]
-        public void Create_two_unequal_songs(string firstName, string secondName, string firstAuthor, string secondAuthor)
+        public void Equals_non_same(string firstName, string secondName, string firstAuthor, string secondAuthor)
         {
             //Песни не равны
             var secondSong = new Song(firstName, firstAuthor);
@@ -16,7 +16,7 @@ namespace LabWorkWithSongs.Test
 
         [Theory]
         [InlineData("Канкан", "ЛСП")]
-        public void Create_two_unequal_songs_in_full(string name, string author)
+        public void Equals_not_full_same(string name, string author)
         {
             //Все исполнители песней не совпадают
             var secondSong = new Song(name, author).WithFeature("Oxxxymiron").WithFeature("Jubilee").WithFeature("Murovei");
@@ -26,7 +26,7 @@ namespace LabWorkWithSongs.Test
 
         [Theory]
         [InlineData("Канкан", "ЛСП", "Murovei")]
-        public void Create_two_unequal_songs_in_name(string firstName, string secondName, string author)
+        public void Equals_not_name_same(string firstName, string secondName, string author)
         {
             //Названия песен не совпадают
             var secondSong = new Song(firstName, author);
@@ -36,7 +36,7 @@ namespace LabWorkWithSongs.Test
 
         [Theory]
         [InlineData("Канкан", "ЛСП", "Murovei")]
-        public void Create_two_unequal_songs_in_author(string name, string firstAuthor, string secondAuthor)
+        public void Equals_not_author_same(string name, string firstAuthor, string secondAuthor)
         {
             //Авторы песен не совпадают
             var secondSong = new Song(name, firstAuthor);

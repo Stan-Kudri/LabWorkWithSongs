@@ -93,7 +93,13 @@ namespace LabWorkWithSongs
 
         public IEnumerator<Song> GetEnumerator()
         {
-            return new SongEnumerator(this);
+            var current = this;
+            while (current.Previous != null)
+            {
+                yield return current;
+                current = current.Previous;
+            }
+            yield return current;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

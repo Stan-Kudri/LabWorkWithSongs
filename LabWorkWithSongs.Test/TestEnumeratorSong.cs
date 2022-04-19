@@ -8,10 +8,9 @@ namespace LabWorkWithSongs.Test
     {
         [Theory]
         [MemberData(nameof(Data.Enumeable), MemberType = typeof(Data))]
-        public void Get_equal_result(Song checkSong, Song[] expectResult)
+        public void Get_Enumerator(Song checkSong, Song[] expectResult)
         {
-            var song = checkSong;
-            var arraySong = song.Reverse().ToArray();
+            var arraySong = checkSong.Reverse().ToArray();
             Assert.Equal(expectResult.Length, arraySong.Length);
             Assert.True(expectResult.SequenceEqual(arraySong));
         }

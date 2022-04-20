@@ -94,12 +94,12 @@ namespace LabWorkWithSongs
         public IEnumerator<Song> GetEnumerator()
         {
             var current = this;
+            yield return current;
             while (current.Previous != null)
             {
-                yield return current;
                 current = current.Previous;
+                yield return current;
             }
-            yield return current;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

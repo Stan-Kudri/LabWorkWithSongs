@@ -52,6 +52,9 @@ pastSong = song;
 song = new Song("Безумие", "ЛСП", pastSong);
 
 foreach (var item in song)
+    Console.WriteLine(item);
+
+foreach (var item in song)
 {
     foreach (var element in item)
     {
